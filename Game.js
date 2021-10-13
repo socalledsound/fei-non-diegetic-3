@@ -45,8 +45,23 @@ class Game{
         this.atGoal = false
     }
 
-    checkMiles(){
-        
+    // this used to be checkMiles, 
+    // we could make that number bigger if we want people to click more....
+    checkBackgroundCount(){
+        // console.log(this.background.count)
+        if(this.background.count === 10){
+            if(this.currentLevel < (this.levelTexts.length - 1)){
+                this.currentLevel++
+                this.background.count = 0
+            }
+
+        }
+    }
+
+    checkGoal(){
+        if(this.currentLevel === this.levelTexts.length - 1){
+            this.atGoal = true
+        }
     }
 
     drawText(){
@@ -55,6 +70,7 @@ class Game{
         if(this.warningTriggered){
             text(this.warningText, this.textX, this.textY);
         }else{
+            // console.log('current level: ', this.currentLevel)
             text(this.levelTexts[this.currentLevel], this.textX, this.textY);
             
         }
@@ -104,13 +120,16 @@ class Game{
 
     // this one works
     moveUp(){
-        if(this.doghero.y > this.doghero.size){
-            this.doghero.move({x: 0, y: this.doghero.speed * -1})
-        } else {
-            console.log('moving bg')
-            this.background.increaseCount()
-            //this.background += this.speed;
+        if(!this.atGoal){
+            if(this.doghero.y > this.doghero.size){
+                this.doghero.move({x: 0, y: this.doghero.speed * -1})
+            } else {
+                // console.log('moving bg')
+                this.background.increaseCount()
+                //this.background += this.speed;
+            }
         }
+
     }
 
 
@@ -128,7 +147,9 @@ class Game{
     }
 
     update(){
-        this.checkMiles()
+        //this.checkMiles()
+        this.checkBackgroundCount()
+        this.checkGoal()
     }
 }
 

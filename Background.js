@@ -29,9 +29,8 @@ class Background{
     }
 
     increaseCount(){
-        this.counter++
+        this.count++
         this.dashes.forEach(dash => {
-            console.log(dash)
             dash.y+=this.speed
         })
     }

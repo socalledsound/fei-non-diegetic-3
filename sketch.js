@@ -12,10 +12,10 @@ const dogHeroStartX = 150
 const dogheroStartY = 400
 const dogHeroSize = 100
 // daisy
-const daisyStartX = 100
-const daisyStartY = 150
-const daisyWidth = 200
-const daisyHeight = 150
+const daisyStartX = 0
+const daisyStartY = 200
+const daisyWidth = 400
+const daisyHeight = 300
 
 
 // vars for images
