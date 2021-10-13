@@ -14,30 +14,6 @@ class Game{
             'yes, keep going!',
             'You are here!'
         ]
-        // nice pattern here, we can also make this programmatically....
-        this.levels = [
-            {
-                min: -4400,
-                max: -4000,
-            },
-            {
-                min: -3400,
-                max: -3000,
-            },
-            {
-                min: -2400,
-                max: -2000,
-            },
-            {
-                min: -1400,
-                max: -1000,
-            },
-            {
-                min: -400,
-                max: 0,
-            },
-
-        ]
         this.textSize = 16
         this.textColor = 255
         this.textX = 20
@@ -67,54 +43,36 @@ class Game{
     drawText(){
         textSize(this.textSize);
         fill(this.textColor);
+        text(this.levelTexts[this.currentLevel], this.textX, this.textY);
         if(this.warningTriggered){
-            text(this.warningText, this.textX, this.textY);
-        }else{
-            // console.log('current level: ', this.currentLevel)
-            text(this.levelTexts[this.currentLevel], this.textX, this.textY);
-            
-        }
-        
+            text(this.warningText, this.textX , this.textY + 50);
+        } 
     }
 
     // need to rework these next!
-    moveDown(){
-        if(playerY < 500) {
-            playerY+=10;
-            console.log(playerY)
-           } else if (playerY >= 500 && playerY < 600){
-            console.log( playerY)
-            //??????????????????? text not shown!!!?????????????
-            textSize(16);
-            fill(255);
-            text('keep going UP!', 50, 10);
-           }
+    moveDown(){   
+        if(!this.doghero.checkEdgeBottom()){
+            this.doghero.move({x: 0, y: this.doghero.speed})
+        }else{
+            this.triggerWarning()
+        }
     }
 
     moveLeft(){
-        if(playerX <= 300 && playerX > 0){
-            playerX-=10; 
-            console.log( playerX);
-            }else if(playerX <= 0) {
-              console.log( playerX);
-                //??????????????????? text not shown!!!?????????????
-              textSize(16);
-              fill(255);
-              text('keep going UP!', 50, 10);
-             }
+        if(!this.doghero.checkEdgeLeft()){
+            this.doghero.move({x: this.doghero.speed * -1, y: 0})
+        }else{
+            this.triggerWarning()
+        }
+    
     }
 
     moveRight(){
-        if(playerX < 300 && playerX  >= 0){
-            playerX+=10; 
-            console.log( playerX);
-            }else {
-              console.log( playerX);
-              //??????????????????? text not shown!!!?????????????
-              textSize(16);
-              fill(255);
-              text('keep going UP!', 50, 10);
-            }
+        if(!this.doghero.checkEdgeRight()){
+            this.doghero.move({x: this.doghero.speed, y: 0})
+        }else{
+            this.triggerWarning()
+        }
     }
 
 
@@ -144,6 +102,19 @@ class Game{
             this.daisy.render()
         }
         
+    }
+
+    resetWarningTriggered = () => {
+        this.warningTriggered = false
+    }
+
+    triggerWarning(){
+        if(!this.warningTriggered){
+            this.warningTriggered = true
+            setTimeout(this.resetWarningTriggered, 1000)
+        }
+        
+
     }
 
     update(){
