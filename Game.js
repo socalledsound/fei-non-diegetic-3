@@ -44,7 +44,7 @@ class Game{
         textSize(this.textSize);
         fill(this.textColor);
         text(this.levelTexts[this.currentLevel], this.textX, this.textY);
-        if(this.warningTriggered){
+        if(this.warningTriggered && !this.atGoal){
             text(this.warningText, this.textX , this.textY + 50);
         } 
     }
