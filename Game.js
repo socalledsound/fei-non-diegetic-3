@@ -61,6 +61,7 @@ class Game{
         
     }
 
+    // need to rework these next!
     moveDown(){
         if(playerY < 500) {
             playerY+=10;
