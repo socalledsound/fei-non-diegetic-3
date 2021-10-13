@@ -102,8 +102,8 @@ class Game{
     }
 
 
+    // this one works
     moveUp(){
-       
         if(this.doghero.y > this.doghero.size){
             this.doghero.move({x: 0, y: this.doghero.speed * -1})
         } else {

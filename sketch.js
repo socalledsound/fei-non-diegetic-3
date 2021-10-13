@@ -47,7 +47,7 @@ function setup() {
 }
 
 function draw() {
-  // CLEAN
+  // CLEAN, right?
   background(30)
   game.update()
   game.render()
